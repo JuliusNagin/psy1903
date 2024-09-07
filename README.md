@@ -1,5 +1,5 @@
 # psy1903
 
-## Your Name Here
+## Julius Nagin
 
 Course work for psy1903
