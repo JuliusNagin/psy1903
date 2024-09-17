@@ -15,7 +15,7 @@ if (response == (num1 + num2)) {
 
 alert(feedback + ' The expected answer is ' + (num1 + num2)); */
 
-let age = prompt('How old are you?');
+/* let age = prompt('How old are you?');
 if (age < 12) {
     alert('Child');
 }
@@ -24,4 +24,14 @@ if (age >= 12 && age < 18) {
 }
 if (age >= 18) {
     alert('Adult');
+} */
+
+let response = prompt('Please enter a whole number.');
+
+if (response % 2 == 0) {
+    alert('That is an even number!');
+
 }
+if (response % 2 !== 0) {
+    alert('That is an odd number.');
+}  
