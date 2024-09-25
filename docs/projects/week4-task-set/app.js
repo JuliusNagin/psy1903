@@ -64,28 +64,121 @@
 
 //Question 8 
 
-function filterNumbers(numbers, evenOrOdd) {
-    let results = [];
-    if (evenOrOdd == 'even') {
-        for (number of numbers) {
-            if (number % 2 == 0) {
-                results.push(number)
-            }
-        }
+// function filterNumbers(numbers, evenOrOdd) {
+//     let results = [];
+//     if (evenOrOdd == 'even') {
+//         for (number of numbers) {
+//             if (number % 2 == 0) {
+//                 results.push(number)
+//             }
+//         }
 
-    } if (evenOrOdd == 'odd') {
-        for (number of numbers) {
-            if (number % 2 != 0) {
-                results.push(number)
-            }
-        }
-    }
-    return (results)
+//     } if (evenOrOdd == 'odd') {
+//         for (number of numbers) {
+//             if (number % 2 != 0) {
+//                 results.push(number)
+//             }
+//         }
+//     }
+//     return (results)
+// }
+// console.log(filterNumbers([1, 2, 3, 4, 5], 'even')); // Expected output: [2, 4]
+// console.log(filterNumbers([1, 2, 3, 4, 5], 'odd')); // Expected output: [1, 3, 5]
+
+// console.log(filterNumbers([45, 10, 11, 61], 'even')); // Expected output: [10]
+// console.log(filterNumbers([45, 10, 11, 61], 'odd')); // Expected output: [45, 11, 61]
+
+
+//Question 9 
+
+// Global variables/functions decluttering 
+
+//instructions/messages 
+let welcomeMessage =
+    `Welcome to the even/odd response time task. 
+    
+You are about to see a series of numbers. 
+
+If number you see is EVEN, type the letter "e".
+If the number you see is ODD, type the letter "o". 
+    
+Please answer as quickly and as accurately as possible. 
+    `;
+
+let instructionReminder = `
+Type the letter 'e' for EVEN.
+Type the letter 'o' for ODD.`
+
+let thankYouMessage = 'Thank you for your time!'
+
+//functions
+
+function getRandomNumber() {
+    let randomNumber = Math.floor(Math.random() * 20) + 1;
+    return randomNumber
 }
-console.log(filterNumbers([1, 2, 3, 4, 5], 'even')); // Expected output: [2, 4]
-console.log(filterNumbers([1, 2, 3, 4, 5], 'odd')); // Expected output: [1, 3, 5]
 
-console.log(filterNumbers([45, 10, 11, 61], 'even')); // Expected output: [10]
-console.log(filterNumbers([45, 10, 11, 61], 'odd')); // Expected output: [45, 11, 61]
+function answerCheck(answer, number) {
+    if (answer == 'o' && number % 2 != 0 || answer == 'e' && number % 2 == 0) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function timeCalc(endTime, startTime) {
+    return (endTime - startTime) / 1000;
+}
+
+
+//The real test
+
+let results = [];
+
+alert(welcomeMessage);
+
+for (let i = 0; i < 5; i++) {
+    let number = getRandomNumber();
+    let startTime = Date.now();
+
+    let answer = prompt(`Number: ${number} ${instructionReminder}`)
+
+    let endTime = Date.now();
+
+    results.push({
+        number: number,
+        response: answer,
+        correct: answerCheck(answer, number),
+        responseTime: timeCalc(endTime, startTime),
+
+
+    })
+
+}
+
+alert(thankYouMessage);
+
+console.log(results);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
