@@ -1,4 +1,4 @@
-alert("In this experiment we will measure your response time. You will be shown a series of simple math equations. Answer these equations as quickly and accurately as you can.");
+/* alert("In this experiment we will measure your response time. You will be shown a series of simple math equations. Answer these equations as quickly and accurately as you can.");
 
 let start1 = Date.now();
 let response1 = prompt('What is ' + (Math.floor(Math.random() * 10) + 1) + ' + ' + (Math.floor(Math.random() * 10) + 1) + '?');
@@ -18,7 +18,7 @@ let end3 = Date.now();
 let responseTime3 = (end3 - start3) / 1000;
 alert('You answered: ' + response3 + ' in ' + responseTime3 + ' seconds ');
 
-alert("Thank you for your participation!");
+alert("Thank you for your participation!"); */
 
 
 

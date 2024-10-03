@@ -1,31 +1,34 @@
+let courseName = 'Programming for Psychologists';
 
-let experiment = "Stroop";
-//console.log(typeof experiment); //string
-//console.log(experiment.charAt(1)); //t
-
-let welcomeMessage = `
-Welcome to our ` + experiment + ` experiment. 
-Please read the instructions carefully`
-//console.log(welcomeMessage);
+// Output the value for courseName translated to all capital letters.
+// Expected result: PROGRAMMING FOR PSYCHOLOGISTS
+console.log(courseName.toUpperCase());
 
 
-let trialCountMax = 20.5;
-//console.log(typeof trialCountMax); //number
+// Output the index position of the word 'Psychologists' within the string stored in courseName.
+// Expected result: 16
+console.log(courseName.indexOf("Psychologists"));
+
+// Output the value for courseName with the word 'Programming' replaced with the word 'Coding'.
+// Expected result: "Coding for Psychologists"
+console.log(courseName.replace("Programming", "Coding"));
 
 
-// TODO: Randomize colors
-let colors = ['red', 'green', 'blue']; // Array conpound data type
+//let count = response.length();
+//let firstLetter = response.charAt[0];
 
-//alert('Welcome to the ' + experiment + ' experiment!');
+//let lastLetter == response.charAt(count - 1);
 
-trialCountMax = 40;
 
-//  At the halfway point we will display a pause screen
-let halfWayCount = trialCountMax / 2;
+let age = 20;
+if (age = 25) {
+    console.log("Age is 25");
+}
 
-//console.log(halfWayCount); // Expected 20
+let a = 5;
+let b = 10;
+console.log(a > 3 && b < 15);
 
-let correct = false;
-console.log(typeof correct);
 
-console.log(10 < 15); //false
+
+

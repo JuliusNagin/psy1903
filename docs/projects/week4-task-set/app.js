@@ -91,74 +91,74 @@
 
 //Question 9 
 
-// Global variables/functions decluttering 
+// // Global variables/functions decluttering 
 
-//instructions/messages 
-let welcomeMessage =
-    `Welcome to the even/odd response time task. 
+// //instructions/messages 
+// let welcomeMessage =
+//     `Welcome to the even/odd response time task. 
     
-You are about to see a series of numbers. 
+// You are about to see a series of numbers. 
 
-If number you see is EVEN, type the letter "e".
-If the number you see is ODD, type the letter "o". 
+// If number you see is EVEN, type the letter "e".
+// If the number you see is ODD, type the letter "o". 
     
-Please answer as quickly and as accurately as possible. 
-    `;
+// Please answer as quickly and as accurately as possible. 
+//     `;
 
-let instructionReminder = `
-Type the letter 'e' for EVEN.
-Type the letter 'o' for ODD.`
+// let instructionReminder = `
+// Type the letter 'e' for EVEN.
+// Type the letter 'o' for ODD.`
 
-let thankYouMessage = 'Thank you for your time!'
+// let thankYouMessage = 'Thank you for your time!'
 
-//functions
+// //functions
 
-function getRandomNumber() {
-    let randomNumber = Math.floor(Math.random() * 20) + 1;
-    return randomNumber
-}
+// function getRandomNumber() {
+//     let randomNumber = Math.floor(Math.random() * 20) + 1;
+//     return randomNumber
+// }
 
-function answerCheck(answer, number) {
-    if (answer == 'o' && number % 2 != 0 || answer == 'e' && number % 2 == 0) {
-        return true
-    } else {
-        return false
-    }
-}
+// function answerCheck(answer, number) {
+//     if (answer == 'o' && number % 2 != 0 || answer == 'e' && number % 2 == 0) {
+//         return true
+//     } else {
+//         return false
+//     }
+// }
 
-function timeCalc(endTime, startTime) {
-    return (endTime - startTime) / 1000;
-}
-
-
-//The real test
-
-let results = [];
-
-alert(welcomeMessage);
-
-for (let i = 0; i < 5; i++) {
-    let number = getRandomNumber();
-    let startTime = Date.now();
-
-    let answer = prompt(`Number: ${number} ${instructionReminder}`)
-
-    let endTime = Date.now();
-
-    results.push({
-        number: number,
-        response: answer,
-        correct: answerCheck(answer, number),
-        responseTime: timeCalc(endTime, startTime),
+// function timeCalc(endTime, startTime) {
+//     return (endTime - startTime) / 1000;
+// }
 
 
-    })
+// //The real test
 
-}
+// let results = [];
 
-alert(thankYouMessage);
+// alert(welcomeMessage);
 
-console.log(results);
+// for (let i = 0; i < 5; i++) {
+//     let number = getRandomNumber();
+//     let startTime = Date.now();
+
+//     let answer = prompt(`Number: ${number} ${instructionReminder}`)
+
+//     let endTime = Date.now();
+
+//     results.push({
+//         number: number,
+//         response: answer,
+//         correct: answerCheck(answer, number),
+//         responseTime: timeCalc(endTime, startTime),
+
+
+//     })
+
+// }
+
+// alert(thankYouMessage);
+
+// console.log(results);
 
 
 
