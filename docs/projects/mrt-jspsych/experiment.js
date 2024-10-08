@@ -15,6 +15,27 @@ let welcomeTrial = {
 };
 timeline.push(welcomeTrial);
 
+//Task Set week 6 likert survey addition
+
+let likertLabels = [
+    "Strongly Disagree",
+    "Disagree",
+    "Neutral",
+    "Agree",
+    "Strongly Agree"
+];
+
+let likertSurvey = {
+    type: jsPsychSurveyLikert,
+    questions: [
+        { prompt: "I enjoy solving math problems.", labels: likertLabels },
+        { prompt: "I find math easy.", labels: likertLabels },
+    ]
+};
+
+timeline.push(likertSurvey);
+
+
 //Block 1
 
 for (let block of conditions) {
