@@ -89,7 +89,7 @@ let resultsTrial = {
         //  ⭐ Update the following three values as appropriate ⭐
         let prefix = 'lexical-decision';
         let dataPipeExperimentId = 'yup6Re9EDZDb';
-        let forceOSFSave = true;
+        let forceOSFSave = false;
 
         // Filter and retrieve results as CSV data
         let results = jsPsych.data
