@@ -53,29 +53,31 @@ let videoTrial = {
 } //needs button focus refining 
 //timeline.push(videoTrial);
 
+let counter = 1;
+
 for (let block of conditions) {
 
-    // and the expected keys to be pressed
+    // Setting left and right category variables
     let leftCategory = block.categories[0];
     let rightCategory = block.categories[1];
 
     // Screen with instructions, indicating the two categories
-    let counter = 1;
 
     let blockintroTrial = {
         type: jsPsychHtmlKeyboardResponse,
         stimulus: `
-        <h1><span class = 'title'>Part ${counter} of 4</span></h1> 
+        <h1><span class = 'title'>Part ${counter++} of 4</span></h1> 
         <p> In this part, the two categories will be: <span class = 'bold'>${leftCategory}</span> and <span class = 'bold'>${rightCategory}</span></p>
         <p>If the word you see in the middle of the screen should be sorted into the <span class = 'bold'>${leftCategory}</span> category, press the <span class = 'key'>F</span> key.</p>
         <p>If thee word you see in the middle of the screen should be sorted into the  <span class = 'bold'>${rightCategory}</span> category, press the <span class = 'key'>J</span> key.</p>
         <p> press the <span class = 'key'>SPACE</span> to begin.</p>  
         `,
         choices: [' '],
-
     }
-    counter = counter++;
+
     timeline.push(blockintroTrial);
+
+
 
     for (let trial of block.trials) {
         // Screen that displays trial.word in the center
