@@ -2,7 +2,7 @@
 
 
 ## AI Prompts
-+ how does the css <ul> element relative spacing work
++ how does the css unordered list element relative spacing work
 + embedding a youtube video into the jspysch keyboard html reesponse stimulus
 + getting embed links from a youtube video
 ## Outside sites
