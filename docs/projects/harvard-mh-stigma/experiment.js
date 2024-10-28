@@ -8,8 +8,8 @@ let broadIntroTrial = {
     stimulus: ` <h1> <span class = 'title'>Welcome to the Harvard Mental Health Stigma IAT!</span></h1>
     <p> In this study, you will complete an implicit association test (IAT). </p> 
     <p> You will be asked to categorize mental and physical health conditions as well as words associated with humanizing and stigmatizing language.</p> 
-    <p> In addition to the IAT, you will be asked to watch a short video and answer some questions about your attitudes, beliefs, and demographics.</p>
-    <p> There are three parts to this experiment.</p>
+    <p> In addition to the IAT, you will be asked to answer some questions about your attitudes, beliefs, and demographics.</p>
+    <p> There are two parts to this experiment.</p>
     <p> press the <span class = 'key'>SPACE</span> to begin.</p> 
     `,
     choices: [' '],
@@ -74,6 +74,9 @@ let likertScale = [
 // Survey questions...need labels and to finish some of the questions. 
 let survey = {
     type: jsPsychSurveyLikert,
+    preamble: `<p><span class = 'title'>Task 1 of 2</span><p>
+    <p>Please answer the following questions:<p>
+    `,
     questions: [
         { prompt: "I feel comfortable expressing my feelings.", labels: likertScale },
         { prompt: "I feel that my mental health is valued at Harvard.", labels: likertScale },
@@ -82,7 +85,10 @@ let survey = {
         { prompt: "It is normal to have issues with mental health.", labels: likertScale },
         { prompt: "Physical health issues", labels: likertScale },
     ],
-    randomize_question_order: true
+    randomize_question_order: true,
+    data: {
+        collect: true,
+    }
 };
 timeline.push(survey);
 
