@@ -1,20 +1,20 @@
 // Modify the following `blocksA`, `blocksB`, and `words` arrays with appropriate values for your experiment
 let blocksA = [
-    ['men', 'women'], //target categories 
-    ['family', 'career'] //attribute categories
+    ['mental health conditions', 'mental health treatment'],//target categories
+    ['humanizing words', 'stigmatizing words'] //attribute categories
 ];
 
 let blocksB = [
-    ['family or men', 'career or women'], //target/attribute combos 
-    ['family or women', 'career or men']  //target/attribute combos 
+    ['mental health conditions or humanizing words', 'mental health treatment or stigmatizing words'], //target/attribute combos 
+    ['mental health conditions or stigmatizing words', 'mental health treatment or humanizing words']  //target/attribute combos 
 ];
 
 // There should be 10 words per category
 let words = {
-    men: ['Calvin', 'Ben', 'Jamal', 'Charles', 'Mateo', 'Henry', 'Lucas', 'Andrew', 'Darnell', 'George'],
-    women: ['Mariah', 'Emily', 'Julia', 'Brenda', 'Tasha', 'Priya', 'Kelsey', 'Jasmine', 'Grace', 'Camila'],
-    family: ['home', 'wedding', 'children', 'relative', 'parent', 'cousin', 'sibling', 'spouse', 'house', 'baby'],
-    career: ['corporation', 'salary', 'interview', 'promotion', 'resume', 'office', 'income', 'hiring', 'bosses', 'corporate'],
+    'mental health conditions': ['depression', 'anxiety', 'OCD', 'PTSD', 'eating disorder', 'body dysmorphia', 'bipolar disorder'],
+    'mental health treatment': ['therapy', 'medication', 'support group', 'counseling', 'psychiatry', 'CAMHS', 'peer counseling', 'SHARE counselors', 'tutors', 'resident deans'],
+    'humanizing words': ['capable', 'normal', 'challenging', 'feeling', 'sane', 'rational', 'realistic', 'human'],
+    'stigmatizing words': ['crazy', 'insane', 'psychotic', 'unstable', 'weak', 'fragile', 'dangerous', 'unpredictable', 'weird', 'useless'],
 };
 
 
