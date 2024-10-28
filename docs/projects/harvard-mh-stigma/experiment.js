@@ -52,11 +52,14 @@ let videoTrial = {
     <p> Press the <span class = 'key'>SPACE</span> key when you have completed the video and are ready to move on to the next task. </p>
     `,
     choices: [' '],
-
+    data: {
+        collect: true,
+        whichPrime: true,
+        trialType: 'prime',
+    },//needs more work on the data side
 } //needs button focus refining 
 if (showTrial) {
     timeline.push(videoTrial);
-    //jsPsych.data.whichPrime = true; 
 }
 
 // Survey Trial //
@@ -124,13 +127,14 @@ for (let block of conditions) {
                 expectedCategoryAsDisplayed: trial.expectedCategoryAsDisplayed,
                 leftCategory: leftCategory,
                 rightCategory: rightCategory,
+                expectedResponse: trial.expectedResponse,
             },
             on_finish: function (data) {
-                if (data.response == trial.expectedResponse) {
-                    iatTrial.data.correct = true;
+                if (data.response == data.expectedResponse) {
+                    data.correct = true;
                 } else {
-                    iatTrial.data.correct = false;
-                }//not finished yet 
+                    data.correct = false;
+                }
             }
 
         }
@@ -191,6 +195,25 @@ let resultsTrial = {
     }
 }
 timeline.push(resultsTrial);
+
+// Debrief //
+let debriefTrial = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+    <h1>Thank you for your participation!</h1> 
+    <p>The experiment is complete. You can now close this tab.</p>
+    `,
+    choices: ['NO KEYS'],
+    on_start: function () {
+        let data = jsPsych.data
+            .get()
+            .filter({ collect: true })
+            .ignore(['stimulus', 'trial_type', 'trial_index', 'plugin_version', 'collect'])
+            .csv();
+        console.log(data);//this data does not match the data saved locally
+    }
+};
+timeline.push(debriefTrial);
 
 
 //Running the experiment 
