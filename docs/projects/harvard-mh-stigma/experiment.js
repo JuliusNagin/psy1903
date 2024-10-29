@@ -36,27 +36,36 @@ let specificIntroTrial = {
 }
 timeline.push(specificIntroTrial);
 
+//Priming Video 
+
+let primeVideos = [
+    { url: "https://www.youtube.com/embed/AYAHkql75qM?si=OVFCmPnPwVTmPB3K", label: 'harvard' },
+    { url: "https://www.youtube.com/embed/CKIMKEXKUas?si=kUzLdVqQkcWFjVJL", label: 'degree' }
+];
+
+let randomVideo = primeVideos[Math.floor(Math.random() * primeVideos.length)];
+
 let videoTrial = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: ` 
-    <h1>Task 1 of 3 </h1>
-    <p>Please watch the following video.</p>
+    <h1> <span class = 'title'>Task 1 of 3</span></h1>
+    <p> Please watch the following video </p>
     <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/AYAHkql75qM?si=OVFCmPnPwVTmPB3K" 
+        src="${randomVideo.url}" 
         title="YouTube video player" frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media;gyroscope; picture-in-picture; web-share" 
         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
         tabindex="-1">
         </iframe>
-    <p> Click off the video and press the <span class = 'key'>SPACE</span> key when you are ready to move on to the next task. </p>
+    <p>Press the <span class = 'key'>SPACE</span> key when you have completed the video and are ready to move on to the next task. </p>
     `,
     choices: [' '],
     data: {
         collect: true,
-        whichPrime: 'HoH',
         trialType: 'prime',
-    },
-}
+        whichPrime: randomVideo.label
+    }
+};
 timeline.push(videoTrial);
 
 //Beginning the outer loop
@@ -150,12 +159,16 @@ let survey = {
     <p>Please answer the following questions:<p>
     `,
     questions: [
-        { prompt: "I feel comfortable expressing my feelings.", labels: likertScale },
-        { prompt: "I feel that my mental health is valued at Harvard.", labels: likertScale },
-        { prompt: "At Harvard, I feel like I belong.", labels: likertScale },
-        { prompt: "Mental health is something that should be taken seriously.", labels: likertScale },
-        { prompt: "It is normal to have issues with mental health.", labels: likertScale },
-        { prompt: "Physical health issues", labels: likertScale },
+        { prompt: "If I had a mental disorder, I would feel ashamed.", labels: likertScale },
+        { prompt: "If I had a mental disorder and I could not solve my own problems, I would feel bad about myself.", labels: likertScale },
+        { prompt: "I would feel a failure if I became mentally unwell.", labels: likertScale },
+        { prompt: "If I had a mental disorder, I would feel like no one would want to get close to me.", labels: likertScale },
+        { prompt: "If I had a mental disorder, I would feel weak.", labels: likertScale },
+        { prompt: "If I had a mental disorder, I would be happy to seek help from a mental health professional.", labels: likertScale },
+        { prompt: "I would feel comfortable discussing a colleague's mental health problem with them.", labels: likertScale },
+        { prompt: "I'm good at talking to people with mental health problems.", labels: likertScale },
+        { prompt: "If I were an employer, I would feel comfortable employing someone with a mental disorder.", labels: likertScale },
+        { prompt: "Having a mental disorder is nothing to be ashamed of.", labels: likertScale },
     ],
     randomize_question_order: true,
     data: {
