@@ -22,7 +22,7 @@ let words = {
 // when developing your experiment you can reduce this number
 // to expedite the process of testing the experiment
 // Always set the count to an even number
-let count = 36; //how many words are shown per category, bump up to 36 when finished
+let count = 4; //how many words are shown per category, bump up to 36 when finished
 
 
 
