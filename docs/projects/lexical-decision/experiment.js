@@ -28,6 +28,27 @@ let welcomeTrial = {
 };
 timeline.push(welcomeTrial);
 
+let primeTrial = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+        <p>You were randomly chosen to see this trial.</p> 
+        <p>Press the <span class='key'>SPACE</span> key to continue.</p>
+        `,
+    choices: [' '],
+    data: {
+        collect: true,
+        trialType: 'prime',
+    },
+    on_load: function () {
+        if (getRandomNumber(0, 1) == 0) {
+            jsPsych.data.addProperties({ sawPrime: false });
+            jsPsych.finishTrial();
+        } else {
+            jsPsych.data.addProperties({ sawPrime: true });
+        }
+    }
+}
+timeline.push(primeTrial);
 
 for (let block of conditions) {
 
@@ -71,6 +92,22 @@ for (let block of conditions) {
             }
         }
         timeline.push(conditionTrial);  //still in body of the for loop
+
+        let feedbackTrial = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: `<h1>Incorrect</h1>`,
+            trial_duration: 1000,
+            choices: ['NO KEY'],
+            on_load: function () {
+                let lastTrialData = jsPsych.data.getLastTrialData().values()[0];
+                if (lastTrialData.correct) {
+                    // Force skip this feedback trial if they got the previous trial correct
+                    jsPsych.finishTrial();
+                }
+            },
+        }
+        timeline.push(feedbackTrial);
+
     };
 }
 
