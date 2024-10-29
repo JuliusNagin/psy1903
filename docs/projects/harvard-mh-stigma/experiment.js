@@ -161,7 +161,7 @@ let survey = {
     questions: [
         { prompt: "If I had a mental disorder, I would feel ashamed.", labels: likertScale },
         { prompt: "If I had a mental disorder and I could not solve my own problems, I would feel bad about myself.", labels: likertScale },
-        { prompt: "I would feel a failure if I became mentally unwell.", labels: likertScale },
+        { prompt: "I would feel like a failure if I became mentally unwell.", labels: likertScale },
         { prompt: "If I had a mental disorder, I would feel like no one would want to get close to me.", labels: likertScale },
         { prompt: "If I had a mental disorder, I would feel weak.", labels: likertScale },
         { prompt: "If I had a mental disorder, I would be happy to seek help from a mental health professional.", labels: likertScale },
