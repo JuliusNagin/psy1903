@@ -1,7 +1,8 @@
-# Name of project
+# Name of project 
+Harvard Mental Health Stigma IAT
 
 ## Created by
-List your team member names here...
+Ash, Grace, Julius 
 
 ## Description
-Include a brief description of the project...
+This IAT aims to guage underlying biases among Harvard students towards mental health conditions and treatment. 

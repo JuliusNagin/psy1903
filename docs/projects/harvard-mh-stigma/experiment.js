@@ -5,18 +5,6 @@ let jsPsych = initJsPsych({
 let timeline = [];
 
 //Various intros, priming video
-let broadIntroTrial = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: ` <h1> <span class = 'title'>Welcome to the Harvard Mental Health Stigma IAT!</span></h1>
-    <p> In this study, you will complete an implicit association test (IAT). </p> 
-    <p> You will be asked to categorize mental and physical health conditions as well as words associated with humanizing and stigmatizing language.</p> 
-    <p> In addition to the IAT, you will be asked to watch a short video and answer some questions about your attitudes and beliefs.</p>
-    <p> There are three parts to this experiment.</p>
-    <p> Press the <span class = 'key'>SPACE</span> to begin.</p> 
-    `,
-    choices: [' '],
-}
-timeline.push(broadIntroTrial);
 
 let specificIntroTrial = {
     type: jsPsychHtmlKeyboardResponse,
@@ -122,11 +110,7 @@ for (let block of conditions) {
                 rightCategory: rightCategory,
             },
             on_finish: function (data) {
-                if (data.response == trial.expectedResponse) {
-                    data.correct = true;
-                } else {
-                    data.correct = false;
-                }
+                data.correct = data.response == trial.expectedResponse
             },
         }
         timeline.push(iatTrial);
