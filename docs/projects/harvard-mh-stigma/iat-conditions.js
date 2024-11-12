@@ -48,7 +48,7 @@ function generateConditions() {
 
             let wordChoices = [];
 
-            if (category.includes('or')) {
+            if (category.includes(' or ')) {
                 let parts = category.split(' or ');
                 wordChoices = shuffle(words[parts[0]].concat(words[parts[1]]));
             } else {
