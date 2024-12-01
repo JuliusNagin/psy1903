@@ -88,13 +88,14 @@ calculate_IAT_dscore <- function(data) {
   pooled_sd <- sd(tmp$rt, na.rm = TRUE)
   
   ## Step 6: Calculate D-score
-  d_score <- (mean_congruent - mean_incongruent) / pooled_sd
+  d_score <- (mean_incongruent - mean_congruent) / pooled_sd
   
   ## Step 7: Delete tmp file
   rm(tmp)
   ## Step 8: Return D-score
   return(d_score)
 }
+
 ## Test out your function and see if you get a d-score
 calculate_IAT_dscore(data)
 
@@ -209,4 +210,88 @@ iatdata1 <- read.csv("~/Desktop/psy1903/osfstorage-archive/iat-2024-11-05-22-01-
 score_questionnaire(iatdata1) 
 
 #Testing out the function
+
+#### Week 13 Task Set: Significance testing   ----------------------
+week13taskset <- read.csv("~/Desktop/psy1903/stats/data_cleaning/data/participant_dScores.csv")
+question2 <- aov(d_score ~ whichPrime, data = week13taskset) 
+summary(question2)
+
+##Question 3
+TukeyHSD(question2)
+
+##Question 4 
+cor.test(week13taskset$d_score, week13taskset$questionnaire)
+
+#### Week 13 Task Set: Graphing   ----------------------
+##Question 5 
+hist(week13taskset$d_score, 
+     xlab = "D Scores", 
+     ylab = "Frequency", 
+     main = "Distribution of D-Scores"
+     )
+
+##Question 6
+ggplot(week13taskset, aes(x = d_score))+ 
+  geom_histogram(
+    binwidth = 0.2, 
+    fill = "skyblue",
+    col = "black"
+    )+ 
+  labs(title = "Distribution of D-Scores", 
+       x = "D-Scores",
+       y =  "Frequency")+ 
+  theme_minimal()
+
+##Question 7
+ggplot(week13taskset, aes(x = d_score))+ 
+  geom_histogram(
+    binwidth = 0.3, 
+    fill = "skyblue",
+    col = "black"
+  )+ 
+  facet_wrap(~whichPrime)+
+  labs(title = "Distribution of D-Scores", 
+       x = "D-Scores",
+       y =  "Frequency")+ 
+  theme_classic()
+
+##Question 8
+ggplot(week13taskset, aes(x= whichPrime, y= d_score))+ 
+  geom_boxplot(aes(fill= whichPrime))+ 
+  theme_classic()+
+  theme(legend.position = "none")+
+  scale_x_discrete(
+    labels = c(
+      "harvard" = "Home at Harvard",
+      "degree" = "Degrees of Difficulty")
+  )+
+  labs(title = "Effect of Prime on D-Scores", 
+       x = "Prime Condition",
+       y =  "D-Scores") 
+
+##Question 9
+ggplot(week13taskset, aes(x= questionnaire, y= d_score))+ 
+  geom_point()+ 
+  geom_smooth(method=lm)+ 
+  labs(title = "Correlation Between Questionnaire and D-Scores", 
+       x = "Questionnaire",
+       y =  "D-Scores")+ 
+  theme_classic()
+
+ ##Question 10 
+ggplot(week13taskset, aes(x= questionnaire, y= d_score))+ 
+  geom_point(color = "blue")+ 
+  geom_smooth(method=lm, color = "red")+ 
+  labs(title = "Correlation Between Questionnaire and D-Scores",
+       subtitle = "Comparing scores: stigmatizing mental health attitudes and treatment/condition implicit biases",
+       x = "Questionnaire",
+       y =  "D-Scores")+ 
+  theme(plot.title = element_text(family = 'serif', face = "bold", hjust = 0.5, size = 14), 
+        axis.title = element_text(family = 'serif', face = "bold", hjust = 0.5, size = 12),
+        plot.subtitle = element_text(family = 'serif', face = "italic", hjust = 0.5, size = 10),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.border = element_rect(color = "black", linewidth = 0.5, fill = NA),
+        plot.background = element_rect(fill = "#FFFFF0", color = NA),
+        )
 
