@@ -75,7 +75,7 @@ str(iatdata2)
 calculate_IAT_dscore <- function(data) {
   
   ## Step 2: Select only trials with rt > 300 ms and < 5000 ms (subset full data frame into new data frame called tmp)
-  tmp <- data[data$rt > 300 & data$rt < 5000,]
+  tmp <- data[data$rt > 300 & data$rt < 5000 & data$correct == TRUE,]
   ## Step 3: Separate congruent and incongruent trials (subset tmp into two new data frames: congruent_trials and incongruent_trials)
   congruent_trials <- tmp[tmp$expectedCategoryAsDisplayed == "treatment or humanizing" | tmp$expectedCategoryAsDisplayed == "disorders or stigmatizing",]
   incongruent_trials <- tmp[tmp$expectedCategoryAsDisplayed == "treatment or stigmatizing" | tmp$expectedCategoryAsDisplayed == "disorders or humanizing",]
@@ -90,8 +90,6 @@ calculate_IAT_dscore <- function(data) {
   ## Step 6: Calculate D-score
   d_score <- (mean_incongruent - mean_congruent) / pooled_sd
   
-  ## Step 7: Delete tmp file
-  rm(tmp)
   ## Step 8: Return D-score
   return(d_score)
 }
@@ -141,7 +139,7 @@ for (file in files_list) {
   dScores[i, "participant_ID"] <- participant_ID
   
   ##Week12: Following the logic of assigning the participant_ID to a single cell, assign the dScores "whichPrime" column to be the current participant's prime label. 
-  dScores[i, "whichPrime"] <- tmp[1,2]
+  dScores[i, "whichPrime"] <- tmp[tmp$trialType == "prime", "whichPrime"]
   
   ## Step 5: Using similar logic, isolate the d_score column for the current row number (i) and assign it to be the current d-score by using our calculate_IAT_dscore on the tmp data file
   dScores[i, "d_score"] <- calculate_IAT_dscore(tmp)
@@ -199,7 +197,7 @@ score_questionnaire <- function(data) {
 ## Reverse score if necessary
   rev_items <- c("Q5", "Q6", "Q7", "Q8", "Q9")
   for (rev_item in rev_items) {
-    questionnaire[,rev_item] <- 5 - questionnaire[,rev_item]
+    questionnaire[,rev_item] <- 4 - questionnaire[,rev_item]
   }
 ## Calculate & return questionnaire score (mean)
   score <- rowMeans(questionnaire, na.rm = TRUE)
@@ -212,40 +210,45 @@ score_questionnaire(iatdata1)
 #Testing out the function
 
 #### Week 13 Task Set: Significance testing   ----------------------
-week13taskset <- read.csv("~/Desktop/psy1903/stats/data_cleaning/data/participant_dScores.csv")
-question2 <- aov(d_score ~ whichPrime, data = week13taskset) 
-summary(question2)
+#### ANOVA -------------------------------------------
+psy1903finaldata <- read.csv("~/Desktop/psy1903/stats/data_cleaning/data/participant_dScores.csv")
+anova_ <- aov(d_score ~ whichPrime, data = psy1903finaldata ) 
+summary(anova_)
 
-##Question 3
-TukeyHSD(question2)
+#### T-Test ---------------------------------------------
 
-##Question 4 
-cor.test(week13taskset$d_score, week13taskset$questionnaire)
+TukeyHSD(anova_)
 
-#### Week 13 Task Set: Graphing   ----------------------
-##Question 5 
-hist(week13taskset$d_score, 
+#### Correlation ---------------------------------------
+
+cor.test(psy1903finaldata$d_score, psy1903finaldata$questionnaire)
+
+#### Base R Histogram -------------------------------
+
+hist(psy1903finaldata$d_score, 
      xlab = "D Scores", 
      ylab = "Frequency", 
      main = "Distribution of D-Scores"
-     )
+)
 
-##Question 6
-ggplot(week13taskset, aes(x = d_score))+ 
+#### ggplot Histogram --------------------------------
+
+ggplot(psy1903finaldata, aes(x = d_score))+ 
   geom_histogram(
     binwidth = 0.2, 
     fill = "skyblue",
     col = "black"
-    )+ 
+  )+ 
   labs(title = "Distribution of D-Scores", 
        x = "D-Scores",
        y =  "Frequency")+ 
   theme_minimal()
 
-##Question 7
-ggplot(week13taskset, aes(x = d_score))+ 
+#### ggplot Histogram by Prime ---------------------
+
+ggplot(psy1903finaldata, aes(x = d_score))+ 
   geom_histogram(
-    binwidth = 0.3, 
+    binwidth = 0.25, 
     fill = "skyblue",
     col = "black"
   )+ 
@@ -255,8 +258,8 @@ ggplot(week13taskset, aes(x = d_score))+
        y =  "Frequency")+ 
   theme_classic()
 
-##Question 8
-ggplot(week13taskset, aes(x= whichPrime, y= d_score))+ 
+#### ggplot Box Plot ----------------------------------
+ggplot(psy1903finaldata, aes(x= whichPrime, y= d_score))+ 
   geom_boxplot(aes(fill= whichPrime))+ 
   theme_classic()+
   theme(legend.position = "none")+
@@ -269,8 +272,8 @@ ggplot(week13taskset, aes(x= whichPrime, y= d_score))+
        x = "Prime Condition",
        y =  "D-Scores") 
 
-##Question 9
-ggplot(week13taskset, aes(x= questionnaire, y= d_score))+ 
+#### ggplot Scatter Plot -------------------------------
+ggplot(psy1903finaldata, aes(x= questionnaire, y= d_score))+ 
   geom_point()+ 
   geom_smooth(method=lm)+ 
   labs(title = "Correlation Between Questionnaire and D-Scores", 
@@ -278,8 +281,8 @@ ggplot(week13taskset, aes(x= questionnaire, y= d_score))+
        y =  "D-Scores")+ 
   theme_classic()
 
- ##Question 10 
-ggplot(week13taskset, aes(x= questionnaire, y= d_score))+ 
+#### ggplot Custom Theme ---------------------------
+ggplot(psy1903finaldata, aes(x= questionnaire, y= d_score))+ 
   geom_point(color = "blue")+ 
   geom_smooth(method=lm, color = "red")+ 
   labs(title = "Correlation Between Questionnaire and D-Scores",
@@ -293,5 +296,4 @@ ggplot(week13taskset, aes(x= questionnaire, y= d_score))+
         panel.grid.major = element_blank(),
         panel.border = element_rect(color = "black", linewidth = 0.5, fill = NA),
         plot.background = element_rect(fill = "#FFFFF0", color = NA),
-        )
-
+  )
